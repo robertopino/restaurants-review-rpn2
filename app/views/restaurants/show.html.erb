@@ -1,19 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
-</p>
+<div class="jumbotron bg-light">
+  <div class="card-body>"
+    <span><h3 class="display-4"><%= @restaurant.name %></h3></span>
+  </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
-</p>
+  <p class="lead mb-4">
+    <h5>
+      Address: <%= @restaurant.address %>  |
+      Rating: <%= @restaurant.rating %>  |
+    </h5>
+      <br/>
+  <p class="lead">
+    <%= link_to 'Edit', edit_restaurant_path(@restaurant), class:'btn btn-secondary' %>
+    <%= link_to 'Back', restaurants_path, class:'btn btn-dark' %>
+  </p>
+</div>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @restaurant.rating %>
-</p>
+<br/>
 
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', restaurants_path %>
+    <h3>Reviews <h6><%= link_to "Leave your review", new_restaurant_review_path(@restaurant), class:'btn btn-primary btn-sm' %></h6></h3>
+
+  <% @restaurant.reviews.each do |review| %>
+  <div class="card">
+    <span><%= review.content %></span>
+    <br/>
+    <br/>
+      <small><%= link_to "Delete", review_path(review), method: :delete, data: { confirm: "Are you sure?" }, class:'btn btn-danger btn-sm' %>
+      </small>
+    </span>
+  <% end %>
+</div>

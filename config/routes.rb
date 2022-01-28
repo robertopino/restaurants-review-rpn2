@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
-  resources :restaurants
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :restaurants do
+
+    # Collection
+    collection do
+      get 'top'
+    end
+
+    # Member
+    member do
+      get 'chef'
+    end
+
+    resources :reviews, only: %i[new create]
+  end
+    resources :reviews, only: %i[destroy]
 end

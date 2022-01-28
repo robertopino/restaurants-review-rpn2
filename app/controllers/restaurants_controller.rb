@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:show, :edit, :update, :destroy, :chef]
 
   # GET /restaurants
   def index
@@ -45,6 +45,13 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.'
   end
 
+  def top
+    @restaurants = Restaurant.where(rating: 5)
+  end
+
+  def chef
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
